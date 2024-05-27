@@ -1,0 +1,12 @@
+{
+	"private": true,
+	"type": "module",
+	"packageManager": "pnpm@9.1.0",
+	"devDependencies": {
+		"@types/node": "^20",
+		"typescript": "^5.4.5",
+		"vite": "^5.2.11",
+		"webpack": "npm:ignoredep@^200.9999.0",
+		"xo": "^0.58.0"
+	}
+}

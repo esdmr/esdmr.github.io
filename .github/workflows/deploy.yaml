@@ -1,0 +1,75 @@
+name: Deployment
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: github-pages
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
+        with:
+          node-version: "20"
+
+      - name: Setup pnpm
+        run: |-
+          corepack enable
+          pnpm --version
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: echo "pnpm_cache_dir=$(pnpm store path)" >>$GITHUB_OUTPUT
+
+      - name: Cache pnpm modules
+        uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.OS }}-pnpm-current-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.OS }}-pnpm-current
+
+      - name: Install packages
+        run: pnpm install
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@1f0c5cde4bc74cd7e1254d0cb4de8d49e9068c7d # v4
+
+      - name: Build
+        run: pnpm vite build
+        env:
+          BASE_URL: ${{ steps.pages.outputs.base_path }}
+
+      - name: Type check
+        run: pnpm tsc
+
+      - name: Lint
+        run: pnpm xo
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@a753861a5debcf57bf8b404356158c8e1e33150c # v2
+        with:
+          path: build
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@13b55b33dd8996121833dbc1db458c793a334630 # v3

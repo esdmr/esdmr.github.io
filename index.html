@@ -6,26 +6,51 @@
 			content="default-src 'self';base-uri 'none';object-src 'none';">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Saeed M Rad (esdmr)</title>
-		<style>
-			:root,
-			body {
-				display: inline-block;
-				height: 100%;
-				width: 100%;
-				margin: 0;
-				padding: 0;
-			}
-
-			body {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-			}
-
-		</style>
+		<script>
+			document.children[0].classList.add('--js-enabled');
+		</script>
+		<script type="module" src="src/index.ts"></script>
 	</head>
 	<body>
-		<p>Site is under construction <span aria-hidden="true">ᓚ₍ ^. .^₎</span></p>
+		<main class="content">
+			<div class="profile">
+				<div class="profile__card --js-rot3d">
+					<div class="profile__face profile--front">
+						<img src="src/profile.2.1.pixel.png" width="64"
+							height="64" alt="" class="profile__avatar">
+						<h1 class="profile__title">
+							<div class="profile__name">Saeed M Rad</div>
+							<div class="profile__username">esdmr</div>
+						</h1>
+						<address class="profile__contact">
+							<div class="profile__github">
+								<span
+									class="profile__github-label">GitHub:</span>
+								<a class="profile__github-link"
+									href="https://github.com/esdmr/">@esdmr</a>
+							</div>
+							<div class="profile__npm">
+								<span class="profile__npm-label">NPM:</span>
+								<a class="profile__npm-link"
+									href="https://www.npmjs.com/~esdmr0/">~esdmr0</a>
+							</div>
+						</address>
+					</div>
+					<div class="profile__face profile--back">
+						<address class="profile__contact">
+							<div class="profile__email">
+								<span class="profile__email-label">Email:</span>
+								<a class="profile__email-link --js-dec-addr"
+									data-addr="a65861e024c609f9fdf755712d73fc97a18d354f3c7270b476f4d9bf9104d355c5b45d997efe0209f1fac60a7e2bbb9eba1cb58da00356386e7cad0d4cd4aca9">My
+									GitHub
+									username, followed by the digit preceding
+									one, available at the Google email
+									servers</a>
+							</div>
+						</address>
+					</div>
+				</div>
+			</div>
+		</main>
 	</body>
 </html>
