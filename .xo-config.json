@@ -1,0 +1,7 @@
+{
+	"prettier": true,
+	"rules": {
+		"@typescript-eslint/no-loop-func": "off",
+		"no-await-in-loop": "off"
+	}
+}
