@@ -28,12 +28,24 @@ body {
 	perspective: 40em;
 }
 
+:root:not(.--js-enabled) .profile {
+	height: auto;
+	perspective: 0;
+}
+
 .profile__card {
 	box-sizing: border-box;
 	width: var(--profile--width);
 	height: var(--profile--height);
 	position: relative;
 	transform-style: preserve-3d;
+}
+
+:root:not(.--js-enabled) .profile__card {
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 1em
 }
 
 .profile__face {
@@ -44,6 +56,10 @@ body {
 	height: var(--profile--height);
 	border-radius: 1em;
 	background-color: #fefcff;
+}
+
+:root:not(.--js-enabled) .profile__face {
+	position: static;
 }
 
 .profile--front {
@@ -95,26 +111,48 @@ body {
 	z-index: 0;
 }
 
+:root:not(.--js-enabled) .profile--back {
+	transform: none;
+}
+
 .profile__email {
 	display: grid;
 	grid-template-columns: auto 1fr;
 	gap: 1ch;
 }
 
-@media (max-width: 27em) {
+@media (max-width: 27em), (max-height: 16em) {
 	.profile {
 		transform: scale(0.75);
 	}
 }
 
-@media (max-width: 20em) {
+@media (max-height: 32em) {
+	:root:not(.--js-enabled) .profile {
+		transform: scale(0.75);
+	}
+}
+
+@media (max-width: 20em), (max-height: 12em) {
 	.profile {
 		transform: scale(0.5);
 	}
 }
 
-@media (max-width: 13em) {
+@media (max-height: 24em) {
+	:root:not(.--js-enabled) .profile {
+		transform: scale(0.5);
+	}
+}
+
+@media (max-width: 13em), (max-height: 8em) {
 	.profile {
+		transform: scale(0.25);
+	}
+}
+
+@media (max-height: 16em) {
+	:root:not(.--js-enabled) .profile {
 		transform: scale(0.25);
 	}
 }
