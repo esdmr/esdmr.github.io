@@ -4,7 +4,7 @@
 	"packageManager": "pnpm@9.6.0",
 	"devDependencies": {
 		"@types/node": "20.14.11",
-		"typescript": "5.5.3",
+		"typescript": "5.5.4",
 		"vite": "5.3.4",
 		"webpack": "npm:ignoredep@200.9999.0",
 		"xo": "0.58.0"
