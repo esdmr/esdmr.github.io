@@ -7,6 +7,6 @@
 		"typescript": "5.5.4",
 		"vite": "5.3.5",
 		"webpack": "npm:ignoredep@200.9999.0",
-		"xo": "0.58.0"
+		"xo": "0.59.3"
 	}
 }
