@@ -5,7 +5,7 @@
 	"devDependencies": {
 		"@types/node": "20.17.10",
 		"typescript": "5.7.2",
-		"vite": "5.4.11",
+		"vite": "5.4.12",
 		"webpack": "npm:ignoredep@200.9999.0",
 		"xo": "0.60.0"
 	}
