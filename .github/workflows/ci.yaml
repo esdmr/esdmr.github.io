@@ -32,7 +32,7 @@ jobs:
         run: echo "pnpm_cache_dir=$(pnpm store path)" >>$GITHUB_OUTPUT
 
       - name: Cache pnpm modules
-        uses: actions/cache@0c907a75c2c80ebcb7f088228285e798b750cf8f # v4
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
         with:
           path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
           key: ${{ runner.OS }}-pnpm-current-${{ hashFiles('pnpm-lock.yaml') }}
