@@ -9,14 +9,14 @@ importers:
   .:
     devDependencies:
       '@types/node':
-        specifier: 22.13.6
-        version: 22.13.6
+        specifier: 22.13.7
+        version: 22.13.7
       typescript:
         specifier: 5.8.2
         version: 5.8.2
       vite:
         specifier: 6.2.0
-        version: 6.2.0(@types/node@22.13.6)
+        version: 6.2.0(@types/node@22.13.7)
       webpack:
         specifier: npm:ignoredep@200.9999.0
         version: ignoredep@200.9999.0
@@ -374,8 +374,8 @@ packages:
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
 
-  '@types/node@22.13.6':
-    resolution: {integrity: sha512-GYmF65GI7417CpZXsEXMjT8goQQDnpRnJnDw6jIYa+le3V/lMazPZ4vZmK1B/9R17fh2VLr2zuy9d/h5xgrLAg==}
+  '@types/node@22.13.7':
+    resolution: {integrity: sha512-oU2q+BsQldB9lYxHNp/5aZO+/Bs0Usa74Abo9mAKulz4ahQyXRHK6UVKYIN8KSC8HXwhWSi7b49JnX+txuac0w==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -2285,7 +2285,7 @@ snapshots:
 
   '@types/json5@0.0.29': {}
 
-  '@types/node@22.13.6':
+  '@types/node@22.13.7':
     dependencies:
       undici-types: 6.20.0
 
@@ -4034,13 +4034,13 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vite@6.2.0(@types/node@22.13.6):
+  vite@6.2.0(@types/node@22.13.7):
     dependencies:
       esbuild: 0.25.1
       postcss: 8.5.3
       rollup: 4.34.7
     optionalDependencies:
-      '@types/node': 22.13.6
+      '@types/node': 22.13.7
       fsevents: 2.3.3
 
   which-boxed-primitive@1.0.2:
