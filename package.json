@@ -3,7 +3,7 @@
 	"type": "module",
 	"packageManager": "pnpm@10.9.0",
 	"devDependencies": {
-		"@types/node": "22.14.1",
+		"@types/node": "22.15.0",
 		"typescript": "5.8.3",
 		"vite": "6.3.4",
 		"webpack": "npm:ignoredep@200.9999.0",
