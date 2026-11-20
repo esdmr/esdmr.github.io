@@ -1,0 +1,9 @@
+{
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"ignorePatterns": [],
+	"jsdoc": true,
+	"proseWrap": "never",
+	"sortImports": true,
+	"tabWidth": 4,
+	"useTabs": true
+}

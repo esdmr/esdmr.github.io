@@ -1,79 +1,70 @@
 name: Deployment
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
-  actions: read
+    contents: read
+    pages: write
+    id-token: write
+    actions: read
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
 
 concurrency:
-  group: github-pages
-  cancel-in-progress: true
+    group: github-pages
+    cancel-in-progress: true
 
 jobs:
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-    environment: github-pages
+    deploy:
+        name: Deploy
+        runs-on: ubuntu-latest
+        environment: github-pages
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        steps:
+            - name: Checkout
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Setup Node.js
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: "24.21.0"
+            - name: Setup Node.js
+              uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+              with:
+                  node-version: "26"
 
-      - name: Temporarily fix corepack bug
-        run: npm install -g corepack@latest
+            - name: Temporarily fix corepack bug
+              run: npm install -g corepack@latest
 
-      - name: Setup pnpm
-        run: |-
-          corepack enable
-          pnpm --version
+            - name: Setup pnpm
+              run: |-
+                  corepack enable
+                  pnpm --version
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: echo "pnpm_cache_dir=$(pnpm store path)" >>$GITHUB_OUTPUT
+            - name: Install packages
+              run: pnpm install
 
-      - name: Cache pnpm modules
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-          key: ${{ runner.OS }}-pnpm-current-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.OS }}-pnpm-current
+            - name: Setup Pages
+              id: pages
+              uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
 
-      - name: Install packages
-        run: pnpm install
+            - name: Build
+              run: pnpm vite build
+              env:
+                  BASE_URL: ${{ steps.pages.outputs.base_path }}
 
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+            - name: Type check
+              run: pnpm tsc
 
-      - name: Build
-        run: pnpm vite build
-        env:
-          BASE_URL: ${{ steps.pages.outputs.base_path }}
+            - name: Lint
+              run: pnpm oxlint
 
-      - name: Type check
-        run: pnpm tsc
+            - name: Formatting
+              run: pnpm oxfmt --check
 
-      - name: Lint
-        run: pnpm xo
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+              with:
+                  path: build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
-        with:
-          path: build
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
