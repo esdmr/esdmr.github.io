@@ -7,9 +7,7 @@ export async function setup(helpText: string, addressText: string) {
 	let digested = await crypto.subtle.digest("SHA-512", encoder.encode(text));
 
 	{
-		const view = new Uint32Array(
-			digested.byteLength / Uint32Array.BYTES_PER_ELEMENT + 1,
-		);
+		const view = new Uint32Array(digested.byteLength / Uint32Array.BYTES_PER_ELEMENT + 1);
 
 		for (let i = 0; i < hashSteps; i++) {
 			view[0] = i;
@@ -20,10 +18,7 @@ export async function setup(helpText: string, addressText: string) {
 
 	const bytes = new Uint8Array(digested);
 
-	const keyText = toHex(xor(encoder.encode(addressText), bytes)).replaceAll(
-		/\s+/g,
-		"",
-	);
+	const keyText = toHex(xor(encoder.encode(addressText), bytes)).replaceAll(/\s+/g, "");
 
 	return keyText;
 }
