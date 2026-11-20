@@ -1,17 +1,9 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": [
-		"config:js-app",
-		"helpers:pinGitHubActionDigests",
-		":ignoreUnstable"
-	],
-	"labels": [
-		"renovate"
-	],
+	"extends": ["config:js-app", "helpers:pinGitHubActionDigests", ":ignoreUnstable"],
+	"labels": ["renovate"],
 	"major": {
-		"addLabels": [
-			"renovate/major"
-		],
+		"addLabels": ["renovate/major"],
 		"automerge": false
 	},
 	"minor": {
@@ -28,9 +20,7 @@
 	},
 	"lockFileMaintenance": {
 		"enabled": true,
-		"addLabels": [
-			"renovate/lockfile"
-		],
+		"addLabels": ["renovate/lockfile"],
 		"schedule": "at 12am on thursday",
 		"automerge": true
 	},
@@ -40,92 +30,49 @@
 	"timezone": "Asia/Tehran",
 	"packageRules": [
 		{
-			"matchDepTypes": [
-				"devDependencies"
-			],
-			"addLabels": [
-				"renovate/development"
-			]
+			"matchDepTypes": ["devDependencies"],
+			"addLabels": ["renovate/development"]
 		},
 		{
-			"matchDepTypes": [
-				"dependencies",
-				"optionalDependencies",
-				"peerDependencies"
-			],
-			"addLabels": [
-				"renovate/production"
-			]
+			"matchDepTypes": ["dependencies", "optionalDependencies", "peerDependencies"],
+			"addLabels": ["renovate/production"]
 		},
 		{
-			"matchPackageNames": [
-				"@vitest/coverage-c8",
-				"vitest"
-			],
-			"addLabels": [
-				"renovate/testing"
-			],
+			"matchPackageNames": ["@vitest/coverage-c8", "vitest"],
+			"addLabels": ["renovate/testing"],
 			"groupName": "testing"
 		},
 		{
-			"matchPackagePatterns": [
-				"^typescript$",
-				"^@types/"
-			],
-			"addLabels": [
-				"renovate/typescript"
-			]
+			"matchPackagePatterns": ["^typescript$", "^@types/"],
+			"addLabels": ["renovate/typescript"]
 		},
 		{
-			"matchPackageNames": [
-				"wouter-preact",
-				"@prefresh/vite"
-			],
+			"matchPackageNames": ["wouter-preact", "@prefresh/vite"],
 			"enabled": false
 		},
 		{
-			"matchDepTypes": [
-				"dependencies",
-				"optionalDependencies",
-				"peerDependencies"
-			],
-			"matchUpdateTypes": [
-				"minor"
-			],
+			"matchDepTypes": ["dependencies", "optionalDependencies", "peerDependencies"],
+			"matchUpdateTypes": ["minor"],
 			"automerge": false
 		},
 		{
-			"matchManagers": [
-				"github-actions"
-			],
-			"addLabels": [
-				"renovate/actions"
-			],
+			"matchManagers": ["github-actions"],
+			"addLabels": ["renovate/actions"],
 			"schedule": "at 12am on thursday",
 			"automerge": false
 		},
 		{
-			"matchManagers": [
-				"github-actions"
-			],
-			"matchPackagePatterns": [
-				"^actions/"
-			],
-			"addLabels": [
-				"renovate/actions/official"
-			],
+			"matchManagers": ["github-actions"],
+			"matchPackagePatterns": ["^actions/"],
+			"addLabels": ["renovate/actions/official"],
 			"groupName": "actions",
 			"schedule": "at any time",
 			"automerge": true,
 			"stabilityDays": 3
 		},
 		{
-			"matchManagers": [
-				"github-actions"
-			],
-			"matchUpdateTypes": [
-				"major"
-			],
+			"matchManagers": ["github-actions"],
+			"matchUpdateTypes": ["major"],
 			"automerge": false
 		}
 	]

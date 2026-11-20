@@ -1,52 +1,40 @@
 name: CI
 
 on:
-  pull_request:
-    branches:
-      - main
+    pull_request:
+        branches:
+            - main
 
 jobs:
-  CI:
-    name: CI
-    runs-on: ubuntu-latest
+    CI:
+        name: CI
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        steps:
+            - name: Checkout
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Setup Node.js
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: "24.21.0"
+            - name: Setup Node.js
+              uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+              with:
+                  node-version: "26"
 
-      - name: Temporarily fix corepack bug
-        run: npm install -g corepack@latest
+            - name: Temporarily fix corepack bug
+              run: npm install -g corepack@latest
 
-      - name: Setup pnpm
-        run: |-
-          corepack enable
-          pnpm --version
+            - name: Setup pnpm
+              run: |-
+                  corepack enable
+                  pnpm --version
 
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        run: echo "pnpm_cache_dir=$(pnpm store path)" >>$GITHUB_OUTPUT
+            - name: Install packages
+              run: pnpm install
 
-      - name: Cache pnpm modules
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-          key: ${{ runner.OS }}-pnpm-current-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.OS }}-pnpm-current
+            - name: Build
+              run: pnpm vite build
 
-      - name: Install packages
-        run: pnpm install
+            - name: Type check
+              run: pnpm tsc
 
-      - name: Build
-        run: pnpm vite build
-
-      - name: Type check
-        run: pnpm tsc
-
-      - name: Lint
-        run: pnpm xo
+            - name: Lint
+              run: pnpm xo

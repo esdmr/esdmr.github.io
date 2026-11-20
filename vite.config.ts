@@ -1,22 +1,16 @@
-import process from 'node:process';
-import {defineConfig} from 'vite';
+import process from "node:process";
+
+import { defineConfig } from "vite";
 
 const ensureTrailingSlash = (url: string) =>
-	url.endsWith('/') ? url : url + '/';
+	url.endsWith("/") ? url : url + "/";
 
-export default defineConfig(({command}) => ({
-	base: ensureTrailingSlash(process.env.BASE_URL ?? '/'),
-	cacheDir: 'node_modules/.cache/vite',
-	esbuild: {
-		minifyIdentifiers: command === 'build',
-		keepNames: command !== 'build',
-		treeShaking: true,
-	},
+export default defineConfig({
+	base: ensureTrailingSlash(process.env.BASE_URL ?? "/"),
+	cacheDir: "node_modules/.cache/vite",
 	build: {
-		target: ['firefox104', 'chrome104'],
-		outDir: 'build',
-		rollupOptions: {
-			input: 'index.html',
-		},
+		minify: "esbuild",
+		target: ["firefox104", "chrome104"],
+		outDir: "build"
 	},
-}));
+});

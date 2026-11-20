@@ -144,7 +144,7 @@ class Card extends Object3d {
 		const elementBounds = this.element.getBoundingClientRect();
 		const horizontalMargin = this.isActive ? activeHorizontalMargin : 0;
 		const verticalMargin = this.isActive ? activeVerticalMargin : 0;
-		const {pageX, pageY, buttons} = event;
+		const { pageX, pageY, buttons } = event;
 
 		if (
 			pageX < elementBounds.left - horizontalMargin ||
@@ -196,15 +196,7 @@ class Card extends Object3d {
 	}
 
 	handlePointerOut() {
-		this.transform(
-			0,
-			0,
-			0,
-			0,
-			1,
-			1,
-			this.isFlipped ? flipDuration : activeDuration,
-		);
+		this.transform(0, 0, 0, 0, 1, 1, this.isFlipped ? flipDuration : activeDuration);
 		this.isActive = false;
 		this.isHeld = false;
 		this.isFlipped = false;
@@ -214,11 +206,11 @@ class Card extends Object3d {
 
 export function setup() {
 	const cards = Array.from(
-		document.querySelectorAll<HTMLElement>('.--js-rot3d'),
+		document.querySelectorAll<HTMLElement>(".--js-rot3d"),
 		(i) => new Card(i),
 	);
 
-	document.body.addEventListener('pointerdown', (event) => {
+	document.body.addEventListener("pointerdown", (event) => {
 		if (rafId === undefined) {
 			rafId = requestAnimationFrame(render);
 		}
@@ -228,7 +220,7 @@ export function setup() {
 		}
 	});
 
-	document.body.addEventListener('pointerup', (event) => {
+	document.body.addEventListener("pointerup", (event) => {
 		if (rafId === undefined) {
 			rafId = requestAnimationFrame(render);
 		}
@@ -238,7 +230,7 @@ export function setup() {
 		}
 	});
 
-	document.body.addEventListener('pointermove', (event) => {
+	document.body.addEventListener("pointermove", (event) => {
 		if (rafId === undefined) {
 			rafId = requestAnimationFrame(render);
 		}
@@ -248,7 +240,7 @@ export function setup() {
 		}
 	});
 
-	document.body.addEventListener('pointerout', ({target}) => {
+	document.body.addEventListener("pointerout", ({ target }) => {
 		if (rafId === undefined) {
 			rafId = requestAnimationFrame(render);
 		}
