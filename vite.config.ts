@@ -9,7 +9,7 @@ export default defineConfig({
 	base: ensureTrailingSlash(process.env.BASE_URL ?? "/"),
 	cacheDir: "node_modules/.cache/vite",
 	build: {
-		minify: "esbuild",
+		minify: "oxc",
 		target: ["firefox104", "chrome104"],
 		outDir: "build"
 	},
