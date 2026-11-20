@@ -40,4 +40,7 @@ jobs:
               run: pnpm tsc
 
             - name: Lint
-              run: pnpm xo
+              run: pnpm oxlint
+
+            - name: Formatting
+              run: pnpm oxfmt --check
